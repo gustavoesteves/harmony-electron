@@ -1,0 +1,52 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Ferramentas</h1>
+      <p>Construtor de acordes</p>
+    </header>
+    <p>O gerador de acorde funciona da seguinte maneira, selecione o instrumento que será a matriz para a
+      geração dos acordes, depois escolha a primeira nota do acorde. Esta nota escolhida será a nota mais grave do
+      acorde. Se a intenção é escolher o acorde de C/G ao invés de selecionar C, selecione
+      primeiro a nota G, depois C e por último E, ou E e depois C, as notas depois do baixo não tem ordem.</p>
+  </div>
+  <div class="row">
+    <div class="col-3 col-12-medium">
+      <h3>Intrumentos</h3>
+      <section class="alt">
+        <form>
+          <select class="form-control" id="SelectInstrument" (change)="onSelectInstrument($event)">
+            <option *ngFor="let item of instruments">{{item.Name}}</option>
+          </select>
+        </form>
+      </section>
+      <h3>Escolha as notas</h3>
+      <section class="alt">
+        <form>
+          <ul class="actions">
+            <li><button type="button" class={{btnNotas}} (click)="changeView('notas')">Notas</button></li>
+            <li><button type="button" class={{btnIntervalos}} (click)="changeView('intervalos')">Intervalos</button>
+            </li>
+          </ul>
+          <div *ngIf="menuAtivo === 'notas'">
+            <span *ngFor="let item of checkedNotes">
+              <input type="checkbox" name="item.note" [attr.id]="item.note" [(ngModel)]="item.checked"
+                (change)="gravaValor(item.checked, item.note)" />
+              <label [attr.for]="item.note">{{ item.note }}</label>
+            </span>
+          </div>
+          <div *ngIf="menuAtivo === 'intervalos'">
+            <span *ngFor="let item of checkedIntervals">
+              <input type="checkbox" name="item.note" [attr.id]="item.note" [(ngModel)]="item.checked"
+                (change)="gravaValor(item.checked, item.note)" />
+              <label [attr.for]="item.note">{{ item.note }}</label>
+            </span>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="col-9 col-12-medium">
+      <h2>Diagramas do acorde selecionado</h2>
+      <div #drawChordsChart class="inner"></div>
+    </div>
+  </div>
+</section>

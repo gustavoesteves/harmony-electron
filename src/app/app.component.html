@@ -1,1 +1,301 @@
-<router-outlet></router-outlet>
+<div id="wrapper">
+  <!-- Paginas -->
+  <div id="main">
+    <div class="inner">
+      <!-- Main Page -->
+      <div *ngIf="menu === 'home'">
+        <app-home></app-home>
+      </div>
+
+      <!-- Draw Chords -->
+      <div class="popup" id="popup">
+        <div class="popup-inner">
+          <div class="popup__text">
+            <app-draw-chords></app-draw-chords>
+          </div>
+          <a class="popup__close" href="#">X</a>
+        </div>
+      </div>
+
+      <!-- Major Mode -->
+      <div *ngIf="menu === 'descricao-maior'">
+        <app-descricao></app-descricao>
+      </div>
+      <div *ngIf="menu === 'maior'">
+        <app-major-mode></app-major-mode>
+      </div>
+      <div *ngIf="menu === 'optional-chods'">
+        <app-optional-chords></app-optional-chords>
+      </div>
+      <div *ngIf="menu === 'secondary-dominants'">
+        <app-secondary-dominants></app-secondary-dominants>
+      </div>
+      <div *ngIf="menu === 'progressao-segunda-quinta'">
+        <app-progressao-segunda-quinta></app-progressao-segunda-quinta>
+      </div>
+      <div *ngIf="menu === 'substitute-dominants'">
+        <app-substitute-dominants></app-substitute-dominants>
+      </div>
+
+      <!-- Minor Mode -->
+      <div *ngIf="menu === 'descricao-menor'">
+        <app-menor-descricao></app-menor-descricao>
+      </div>
+      <div *ngIf="menu === 'natural'">
+        <app-minor-mode></app-minor-mode>
+      </div>
+
+      <!-- Outras abordagens-->
+      <div *ngIf="menu === 'harmonia-negativa'">
+        <app-harmonia-negativa></app-harmonia-negativa>
+      </div>
+      <div *ngIf="menu === 'harmonia-aleatoria'">
+        <app-harmonia-aleatoria></app-harmonia-aleatoria>
+      </div>
+      <div *ngIf="menu === 'tabela-tonalidades'">
+        <app-tabela-tonalidades></app-tabela-tonalidades>
+      </div>
+      <div *ngIf="menu === 'modulacao'">
+        <app-modulacao></app-modulacao>
+      </div>
+      <div *ngIf="menu === 'acorde-emprestimo'">
+        <app-acorde-emprestimo></app-acorde-emprestimo>
+      </div>
+
+      <!-- Harmonia Aplicada -->
+      <div *ngIf="menu === 'resumo'">
+        <app-resumo></app-resumo>
+      </div>
+      <div *ngIf="menu === 'choro'">
+        <app-harmony-sequency></app-harmony-sequency>
+      </div>
+
+      <!-- Ferramentas -->
+      <div *ngIf="menu === 'frase-maior'">
+        <app-frase-maior></app-frase-maior>
+      </div>
+      <div *ngIf="menu === 'construtor-acordes'">
+        <app-construtor-acordes></app-construtor-acordes>
+      </div>
+      <div *ngIf="menu === 'construtor-escalas'">
+        <app-construtor-escalas></app-construtor-escalas>
+      </div>
+      <div *ngIf="menu === 'pesquisa-escalas'">
+        <app-escalas-acorde></app-escalas-acorde>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu do sistema-->
+  <div id="sidebar">
+    <div class="inner">
+      <!-- Navbar Search-->
+      <section class="alt">
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post" action="#">
+          <select name="demo-category" id="demo-category" (change)="onSelect($event)">
+            <option value="">Tonalidade</option>
+            <option value="C">C</option>
+            <option value="G">G</option>
+            <option value="D">D</option>
+            <option value="A">A</option>
+            <option value="E">E</option>
+            <option value="B">B</option>
+            <option value="F#">F&#9839;</option>
+            <option value="Gb">G&#9837;</option>
+            <option value="C#">C&#9839;</option>
+            <option value="Db">D&#9837;</option>
+            <option value="G#">G&#9839;</option>
+            <option value="Ab">A&#9837;</option>
+            <option value="D#">D&#9839;</option>
+            <option value="Eb">E&#9837;</option>
+            <option value="A#">A&#9839;</option>
+            <option value="Bb">B&#9837;</option>
+            <option value="F">F</option>
+          </select>
+        </form>
+      </section>
+      <!-- Menu -->
+      <nav id="menu">
+        <!-- Abordagem Funcional -->
+        <header class="major">
+          <h2>Harmonia funcional</h2>
+        </header>
+        <ul>
+          <li>
+            <span class={{modoMaior}} (click)="openMenu('modoMaior')">O modo maior</span>
+            <ul>
+              <li><a class={{menuSelecionado[0].Status}} (click)="changeMenu('maior')">Acordes</a></li>
+              <li><a class={{menuSelecionado[1].Status}} (click)="changeMenu('optional-chods')">Dominantes</a></li>
+              <li><a class={{menuSelecionado[2].Status}} (click)="changeMenu('secondary-dominants')">Dominantes
+                  secundárias</a></li>
+              <li><a class={{menuSelecionado[3].Status}} (click)="changeMenu('progressao-segunda-quinta')">A
+                  progressão II- &#8594; V</a></li>
+              <li><a class={{menuSelecionado[4].Status}} (click)="changeMenu('substitute-dominants')">Subdominantes</a>
+              </li>
+              <li><a class="" href="#">Diminutos</a></li>
+              <li><a class={{menuSelecionado[21].Status}} (click)="changeMenu('resumo')">Resumo</a></li>
+            </ul>
+          </li>
+          <li>
+            <span class={{modoMenor}} (click)="openMenu('modoMenor')">O modo menor</span>
+            <ul>
+              <li><a class={{menuSelecionado[5].Status}} (click)="changeMenu('natural')">Acordes</a></li>
+              <li><a class="" href="#">Dominantes</a></li>
+              <li><a class="" href="#">Dominantes secundárias</a></li>
+              <li><a class="" href="#">Subdominantes</a></li>
+            </ul>
+          </li>
+          <li>
+            <span class={{menuOutrasAbordagens}} (click)="openMenu('menuOutrasAbordagens')">Outras técnicas e
+              abordagens</span>
+            <ul>
+              <li><a class={{menuSelecionado[20].Status}} (click)="changeMenu('acorde-emprestimo')">Acordes de
+                  empréstimo</a></li>
+              <li><a class={{menuSelecionado[15].Status}} (click)="changeMenu('modulacao')">Modulação</a></li>
+              <li><a class={{menuSelecionado[19].Status}} (click)="changeMenu('harmonia-negativa')">Harmonia
+                  negativa</a></li>
+              <li><a href="#">Neotonalismo</a></li>
+              <li><a class={{menuSelecionado[18].Status}} (click)="changeMenu('harmonia-aleatoria')">Harmonia
+                  aleatória</a></li>
+              <li><a href="#">Tríades similares</a></li>
+              <li><a href="#">Enarmonia do trítono</a></li>
+              <li><a href="#">Tríades seriais</a></li>
+              <li><a class={{menuSelecionado[17].Status}} (click)="changeMenu('tabela-tonalidades')">Tabela de
+                  características das tonalidades</a></li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+        <!-- Abordagem Modal-->
+        <header class="major">
+          <h2>Harmonia Modal</h2>
+        </header>
+        <ul>
+          <li>
+            <span class={{modoModal}}>Abordagem modal</span>
+            <ul>
+              <li>
+                <span>O modo maior e acordes próprios da escala</span>
+                <ul></ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+
+        <!-- Abordagem Clássica-->
+        <header class="major">
+          <h2>Harmonia Clássica</h2>
+        </header>
+        <ul>
+          <li>
+            <span class={{classico}}>Abordagem clássica</span>
+            <ul>
+              <li>
+                <span>O modo maior e acordes próprios da escala</span>
+                <ul></ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+        <!-- Contraponto -->
+        <header class="major">
+          <h2>Contraponto</h2>
+        </header>
+        <ul>
+          <li>
+            <span class={{duasVozes}} (click)="openMenu('duasVozes')">Contraponto a duas vozes</span>
+            <ul>
+              <li><a href="#">Primeira espécie</a></li>
+              <li><a href="#">Segunda espécie</a></li>
+              <li><a href="#">Terceira espécie</a></li>
+              <li><a href="#">Quarta espécie</a></li>
+              <li><a href="#">Organização rítmica</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span class={{linhaMelodica}} (click)="openMenu('linhaMelodica')">A linha melodica</span>
+            <ul>
+              <li><a href="#">O motivo</a></li>
+              <li><a href="#">O tema</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span class={{linhaMelodica}} (click)="openMenu('linhaMelodica')">Contraponto livre a duas vozes</span>
+            <ul>
+              <li><a href="#">O motivo</a></li>
+              <li><a href="#">O tema</a></li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+        <!-- Ferramentas -->
+        <header class="major">
+          <h2>Ferramentas</h2>
+        </header>
+        <ul>
+          <li>
+            <span class={{classico}}>Frases</span>
+            <ul>
+              <li><a (click)="changeMenu('frase-maior')">Frases aleatórias Maior</a></li>
+              <li><a href="#">Frases aleatórias Menor</a></li>
+              <li><a href="#">Frases aleatórias Modais</a></li>
+            </ul>
+          </li>
+          <li>
+            <span class={{classico}}>Construtores</span>
+            <ul>
+              <li><a class={{menuSelecionado[12].Status}} (click)="changeMenu('construtor-acordes')">Construtor de
+                  acordes</a></li>
+              <li><a class={{menuSelecionado[13].Status}} (click)="changeMenu('construtor-escalas')">Construtor de
+                  escalas</a></li>
+            </ul>
+          </li>
+          <li>
+            <span class={{classico}}>Pesquisas</span>
+            <ul>
+              <li><a class={{menuSelecionado[14].Status}} (click)="changeMenu('pesquisa-escalas')">Pesquisa escalas</a>
+              </li>
+              <li><a href="#" (click)="changeMenu('inversao-acorde')">Inversão de acorde</a></li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+
+        <!-- Harmonia Aplicada -->
+        <header class="major">
+          <h2>Harmonia Aplicada</h2>
+        </header>
+        <ul>
+          <li><span class={{classico}}>MPB</span>
+            <ul>
+              <li><a class={{menuSelecionado[16].Status}} (click)="changeMenu('choro')">Choro</a></li>
+              <li><a href="#">Samba</a></li>
+              <li><a href="#">Baião</a></li>
+              <li><a href="#">Frevo</a></li>
+              <li><a href="#">Valsa Mineira</a></li>
+            </ul>
+          </li>
+          <li><span class={{classico}}>Clássica</span>
+            <ul>
+              <li><a href="#">Sonata</a></li>
+              <li><a href="#">Gavotte</a></li>
+              <li><a href="#">Rondo</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+  </div>
+
+</div>

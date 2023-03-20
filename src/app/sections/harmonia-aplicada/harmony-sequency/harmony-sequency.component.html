@@ -1,0 +1,42 @@
+<section>
+    <header>
+        <h2>Motivo aleatório de 16 compassos</h2>
+    </header>
+    <div class="content">
+        <ul class="actions">
+        
+            <select class="form-control" id="SelectEsquema" (change)="onSelect($event)">
+                <option *ngFor="let item of esquemas">{{item.Nome}}</option>
+            </select>
+        
+            <li><button class="button primary large" (click)="onClick()">Frase Aleatória</button></li>
+            <li><button class="button primary large" (click)="onClickXML()">Gerar XMLMusic</button></li>
+        </ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of header" scope="col">{{column.Compasso}}</th>
+                    <th *ngFor="let column of header" scope="col">{{column.Frase1}}</th>
+                    <th *ngFor="let column of header" scope="col">{{column.Frase2}}</th>
+                    <th *ngFor="let column of header" scope="col">{{column.Frase3}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let column of body">
+                    <td>
+                        <div [innerHTML]="column.Compasso"></div>
+                    </td>
+                    <td>
+                        <div [innerHTML]="column.Frase1"></div>
+                    </td>
+                    <td>
+                        <div [innerHTML]="column.Frase2"></div>
+                    </td>
+                    <td>
+                        <div [innerHTML]="column.Frase3"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

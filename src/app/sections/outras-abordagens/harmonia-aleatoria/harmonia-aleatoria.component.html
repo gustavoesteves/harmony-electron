@@ -1,0 +1,42 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Outras técnicas e abordagens</h1>
+    </header>
+    <div class="row">
+      <div class="col-12 col-12-medium">
+        <h2>Harmonia aleatória</h2>
+        <p>Harmonia aleatória foi um sistema composicional criado por Kenny Werner, que sustenta a idéia de que
+          qualquer acorde pode vir precedido ou posto após a qualquer acorde.</p>
+        <p>Abaixo temos um pequeno aplicativo que irá gerar os acordes de forma aleatória para exercitarmos esse
+          princípio composicional.</p>
+        <h3>Quantidade de compassos</h3>
+        <ul class="actions">
+          <li><button type="button" class="button small" (click)="changeCompasso(4)">4</button></li>
+          <li><button type="button" class="button small" (click)="changeCompasso(6)">6</button></li>
+          <li><button type="button" class="button small" (click)="changeCompasso(8)">8</button></li>
+          <li><button type="button" class="button small" (click)="changeCompasso(12)">12</button></li>
+          <li><button type="button" class="button small" (click)="changeCompasso(16)">16</button></li>
+        </ul>
+        <button class="button primary large" (click)="onClick()">Frase Aleatória</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let column of header" scope="col">{{column}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of body">
+              <td *ngFor="let column of header">
+                <div *ngIf="column === 'Acorde'">
+                    <a class="loadChords" href="#popup" [innerHTML]="item.Acorde.Acorde" (click)="loadChords(item.Acorde)"></a>
+                  </div>
+                  <div *ngIf="column != 'Acorde'" [innerHTML]="item[column]"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

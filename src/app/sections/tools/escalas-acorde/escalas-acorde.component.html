@@ -1,0 +1,56 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Ferramentas</h1>
+      <p>Pesquisa escalas</p>
+    </header>
+    <p>Escolha as notas do acorde em questão que listaremos as escalas possíveis que combinam com o acorde.</p>
+  </div>
+  <div class="row">
+    <div class="col-3 col-12-medium">
+      <h3>Baixo do acorde</h3>
+      <section class="alt">
+        <form>
+          <!--
+          <select name="demo-category" (change)="onSelectBass($event.target.value)">
+            <option *ngFor="let item of menuBass">{{item}}</option>
+          </select>
+          -->
+        </form>
+      </section>
+      <h3>Escolha as notas</h3>
+      <section class="alt">
+        <form>
+          <div *ngIf="menuAtivo === 'notas'">
+            <span *ngFor="let item of checkedNotes">
+              <input type="checkbox" name="item.note" [attr.id]="item.note" [(ngModel)]="item.checked"
+                (change)="gravaValor(item.checked, item.note)" />
+              <label [attr.for]="item.note">{{ item.note }}</label>
+            </span>
+          </div>
+          <button type="button" class="button primary small" (click)="pesquisandoEscalas()">Pesquisa</button>
+        </form>
+      </section>
+    </div>
+    <div class="col-9 col-12-medium">
+      <h2>Escala das notas selecionadas</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let column of header" scope="col">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of escalas">
+            <td *ngFor="let column of header">
+              <div *ngIf="column === 'Acorde'">
+                <a class="loadChords"></a>
+              </div>
+              <div *ngIf="column != 'Acorde'" [innerHTML]="item[column]"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,72 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>O Modo Maior</h1>
+      <p>Dominantes Secundárias</p>
+    </header>
+    <div class="row">
+      <div class="col-3 col-12-medium">
+        <p>Uma forma de ampliarmos as cores e fronteiras da nossa tonalidade são acordes Dominantes Secundários.
+          Usaremos um recurso que já empregamos a resolução V → I. Dominante Secundária é o auamento da
+          expectativa (V) para resolvermos uma quinta abaixo (I), só que faremos isso com os outros graus.</p>
+        <p>Como exemplo poderiamos considerar a progressão III- → VI- (o acorde de VI fica uma quinta abaixo do
+          III). O que faremos é transforma-lo em um acorde maior (como o quinto grau que é a maior tensão para o
+          primeiro grau) para aumentarmos a expectativa de resolução, ficando III7 → VI-. Como não existe III7 (o
+          terceiro grau é ) na tonolidade diatonica maior, notaremos esse acorde como V7/VI, justamente por que o
+          resolveremos no VI grau.</p>
+        <p>Algumas dicas para uso das Dominantes Secundárias:</p>
+        <ul>
+          <li>A quarta nota da escala deve ser evitada.</li>
+          <li>Sugerimos que acordes acrescidos da 9a e 13a resolvam em acordes maiores (ex. V/V(13) → V).</li>
+          <li>Assim como acordes acrescidos de b9a, #9a ou b13a resolvam em acordes menores (ex. V/VI(b13) → VI-).
+          </li>
+        </ul>
+      </div>
+      <div class="col-9 col-12-medium">
+        <h2>Acordes de Dominantes Secundárias</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let column of header" scope="col">{{column}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of secondaryDominants">
+              <td *ngFor="let column of header">
+                <div *ngIf="column === 'Acorde'">
+                  <div [innerHTML]="item.Grau"></div>
+                  <a class="loadChords" href="#popup" [innerHTML]="item.Acorde" (click)="loadChords(item)"></a>
+                </div>
+                <div *ngIf="column != 'Acorde'" [innerHTML]="item[column]"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Extendendo as Dominantes Secundárias</h2>
+        <p>Conseguimos aumentar a tensão/relaxamento com a progressão do grau corrente em
+          direção a uma quinta abaixo. Portanto seria possível encadearmos por exemplo, V/III → V/VI → V/II → V/V →
+          V → I.</p>
+        <p>Seguindo este mesmo padrão poderiamos colocar antes de V/III mais uma dominante secundária acima, ou seja
+          uma dominante secundária em que a progressão daria um salto de quinta abaixo como todas as outras.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let column of header" scope="col">{{column}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of extendedDominants">
+              <td *ngFor="let column of header">
+                <div *ngIf="column === 'Acorde'">
+                  <div [innerHTML]="item.Grau"></div>
+                  <a class="loadChords" href="#popup" [innerHTML]="item.Acorde" (click)="loadChords(item)"></a>
+                </div>
+                <div *ngIf="column != 'Acorde'" [innerHTML]="item[column]"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

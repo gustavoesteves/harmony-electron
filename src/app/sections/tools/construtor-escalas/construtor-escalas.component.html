@@ -1,0 +1,39 @@
+<section>
+    <div class="content">
+      <header>
+        <h1>Ferramentas</h1>
+        <p>Construtor de escalas</p>
+      </header>
+      <p>O gerador de escala proposto funciona da seguinte maneira, selecione o instrumento que será a matriz para a
+        geração da escala, depois escolha as notas que irão compor a escala.</p>
+    </div>
+    <div class="row">
+      <div class="col-3 col-12-medium">
+        <h3>Intrumentos</h3>
+        <section class="alt">
+          <form>
+            <!--
+            <select class="form-control" id="SelectInstrument" (change)="onSelectInstrument($event.target.value)">
+              <option *ngFor="let item of instruments">{{item.Name}}</option>
+            </select>
+            -->
+          </form>
+        </section>
+        <h3>Escolha as notas</h3>
+        <section class="alt">
+          <form>
+            <span *ngFor="let item of checkedNotes">
+              <input type="checkbox" name="item.note" [attr.id]="item.note" [(ngModel)]="item.checked"
+                (change)="gravaValor(item.checked, item.note)" />
+              <label [attr.for]="item.note">{{ item.note }}</label>
+            </span>
+          </form>
+        </section>
+      </div>
+      <div class="col-9 col-12-medium">
+        <h2>Desenho da escala selecionada</h2>
+        <div #drawChordsChart class="inner"></div>
+      </div>
+    </div>
+  </section>
+  

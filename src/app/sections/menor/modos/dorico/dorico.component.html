@@ -1,0 +1,19 @@
+<h2>Acordes do modo menor Dórico</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let column of header" scope="col">{{column}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dorianMode">
+      <td *ngFor="let column of header">
+        <div *ngIf="column === 'Acorde'">
+          <div [innerHTML]="item.Grau"></div>
+          <a class="loadChords" href="#popup" [innerHTML]="item.Acorde" (click)="loadChords(item)"></a>
+        </div>
+        <div *ngIf="column != 'Acorde'" [innerHTML]="item[column]"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>

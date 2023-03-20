@@ -1,50 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
-html, body {
-  margin: 0;
-  padding: 0;
+@import './assets/sass/libs/vars';
+@import './assets/sass/libs/functions';
+@import './assets/sass/libs/mixins';
+@import './assets/sass/libs/vendor';
+@import './assets/sass/libs/breakpoints';
+@import './assets/sass/libs/html-grid';
+@import './assets/css/fontawesome-all.min.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700');
 
-  height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-}
+/*
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
 
-/* CAN (MUST) BE REMOVED ! Sample Global style */
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+// Breakpoints.
 
-  background: url(./assets/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
+	@include breakpoints((
+		xlarge:   ( 1281px,  1680px ),
+		large:    ( 981px,   1280px ),
+		medium:   ( 737px,   980px  ),
+		small:    ( 481px,   736px  ),
+		xsmall:   ( 361px,   480px  ),
+		xxsmall:  ( null,    360px  ),
+		xlarge-to-max:    '(min-width: 1681px)',
+		small-to-xlarge:  '(min-width: 481px) and (max-width: 1680px)'
+	));
 
-  .title {
-    color: white;
-    margin: 0;
-    padding: 50px 20px;
-  }
+// Base.
 
-  a {
-    color: #fff !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #ed3330;
-    padding: 20px;
-    border-radius: 5px;
-    display: inline-block;
-    border: none;
-    transition: all 0.4s ease 0s;
+	@import './assets/sass/base/reset';
+	@import './assets/sass/base/page';
+	@import './assets/sass/base/typography';
 
-    &:hover {
-      background: #fff;
-      color: #ed3330 !important;
-      letter-spacing: 1px;
-      -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
-      transition: all 0.4s ease 0s;
-    }
-  }
-}
+// Component.
 
+	@import './assets/sass/components/row';
+	@import './assets/sass/components/section';
+	@import './assets/sass/components/form';
+	@import './assets/sass/components/box';
+	@import './assets/sass/components/icon';
+	@import './assets/sass/components/image';
+	@import './assets/sass/components/list';
+	@import './assets/sass/components/actions';
+	@import './assets/sass/components/icons';
+	@import './assets/sass/components/contact';
+	@import './assets/sass/components/pagination';
+	@import './assets/sass/components/table';
+	@import './assets/sass/components/button';
+	@import './assets/sass/components/mini-posts';
+	@import './assets/sass/components/features';
+	@import './assets/sass/components/posts';
+
+// Layout.
+
+	@import './assets/sass/layout/wrapper';
+	@import './assets/sass/layout/main';
+	@import './assets/sass/layout/sidebar';
+	@import './assets/sass/layout/header';
+	@import './assets/sass/layout/banner';
+	@import './assets/sass/layout/footer';
+	@import './assets/sass/layout/menu';
+	@import './assets/sass/layout/popup';

@@ -1,0 +1,151 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Ferramentas</h1>
+      <p>Frases Aleatórias Maior</p>
+    </header>
+    <div class="row">
+      <div class="col-4 col-12-medium">
+        <h2>Idéias para progressão</h2>
+        <p>Um bom ponto de partida para progressão harmônica dos acordes em modo Maior seria,
+          partindo de qualquer acorde do
+          modo dessemos prosseguimento de acordo com a tabela.</p>
+      </div>
+      <div class="col-8 col-12-medium">
+        <form>
+          <ul class="actions">
+            <li><button type="button" class={{btnGrau}} (click)="changeView('grau')">Graus</button></li>
+            <li><button type="button" class={{btnAcorde}} (click)="changeView('acorde')">Acordes</button></li>
+          </ul>
+        </form>
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{notes[3].note}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>&#10556;</td>
+                <td></td>
+                <td>&#8595;</td>
+                <td></td>
+                <td>&#10556;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>{{notes[2].note}}</td>
+                <td>&#8594;</td>
+                <td>{{notes[5].note}}</td>
+                <td>&#8594;</td>
+                <td>{{notes[1].note}}</td>
+                <td>&#8594;</td>
+                <td>{{notes[4].note}}</td>
+                <td>&#8594;</td>
+                <td>{{notes[0].note}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>&#10554;</td>
+                <td></td>
+                <td>&#8595;</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{notes[6].note}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Gerador de frases -->
+    <div class="row">
+      <div class="col-9 col-12-medium">
+        <h2>Gerando frases aleatórias</h2>
+        <p>Baseados na tabela acima usaremos um algorítimo para gerar frases aleatórias para estudo.</p>
+        <p>Para gerar mais possibilidades daremos a opção de gerar frases com acordes naturais, com sétima,
+          com suas inversões (naturais e sétima) e com as notas de alteração segundo a tabela do modo maior.
+        </p>
+        <div class="row">
+          <div class="col-6 col-12-medium">
+            <h3>Qualidade dos acordes</h3>
+            <ul class="actions">
+              <li><button type="button" class={{modoNatural}} (click)="changeModoFrase(1)">Natural</button></li>
+              <li><button type="button" class={{modoSetima}} (click)="changeModoFrase(2)">Sétima</button></li>
+              <li><button type="button" class={{modoInversao}} (click)="changeModoFrase(3)">Inversões</button>
+              </li>
+            </ul>
+            <ul class="actions">
+              <li><button type="button" class={{modoAlteracao}} (click)="changeModoFrase(4)">Alterações</button>
+              <li><button type="button" class={{modoSecundaria}} (click)="changeModoFrase(5)">Secundárias</button>
+              </li>
+            </ul>
+            <ul class="actions">
+              <li><button type="button" class={{modoSub}} (click)="changeModoFrase(6)">Sub Dominante</button>
+            </ul>
+          </div>
+          <div class="col-6 col-12-medium">
+            <h3>Quantidade de compassos</h3>
+            <ul class="actions">
+              <li><button type="button" class={{comp4}} (click)="changeCompasso(4)">4</button></li>
+              <li><button type="button" class={{comp6}} (click)="changeCompasso(6)">6</button></li>
+              <li><button type="button" class={{comp8}} (click)="changeCompasso(8)">8</button></li>
+              <li><button type="button" class={{comp12}} (click)="changeCompasso(12)">12</button></li>
+              <li><button type="button" class={{comp16}} (click)="changeCompasso(16)">16</button></li>
+            </ul>
+            <h3>Finalização da frase</h3>
+            <ul class="actions">
+              <li><button type="button" class={{final1}} (click)="changeFinalization(0)">Tônica</button></li>
+              <li><button type="button" class={{final5}} (click)="changeFinalization(4)">Quinta</button></li>
+            </ul>
+          </div>
+        </div>
+        <ul class="actions">
+          <li>
+            <button class="button primary" (click)="fraseGenarator()">Gerar Frase</button>
+          </li>
+          <li><button class="button primary">Exportar MuseScore</button></li>
+        </ul>
+      </div>
+      <div class="col-3 col-12-medium">
+        <h2>Frase</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <th *ngFor="let column of header" scope="col">{{column}}</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of fraseGerada">
+                <td *ngFor="let column of header">
+                  <div [innerHTML]="item[column]"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

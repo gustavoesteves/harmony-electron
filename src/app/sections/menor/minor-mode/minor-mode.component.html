@@ -1,0 +1,53 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>O Modo Menor</h1>
+      <p>Acordes</p>
+    </header>
+    <div class="row">
+      <div class="col-3 col-12-medium">
+        <h3>Modo menor</h3>
+        <section class="alt">
+          <form>
+            <ul class="alt">
+              <li *ngFor="let item of modos">{{item.Name}}</li>
+            </ul>
+            <select class="form-control" id="SelectModoMenor" (change)="onSelectModoMenor($event)">
+              <option *ngFor="let item of modos">{{item.Name}}</option>
+            </select>
+          </form>
+        </section>
+        <p>O modo menor Natural é nosso conhecido modo Eólio.</p>
+      </div>
+      <div class="col-9 col-12-medium">
+        <div *ngIf="modo === 'Natural'">
+          <app-natural></app-natural>
+        </div>
+        <div *ngIf="modo === 'Harmônico'">
+          <app-harmonico></app-harmonico>
+        </div>
+        <div *ngIf="modo === 'Melódico'">
+          <app-melodico></app-melodico>
+        </div>
+        <div *ngIf="modo === 'Dórico'">
+          <app-dorico></app-dorico>
+        </div>
+        <div *ngIf="modo === 'Frígio'">
+          <app-frigio></app-frigio>
+        </div>
+        <div *ngIf="modo === 'Menor Jazz'">
+          <app-menor-jazz></app-menor-jazz>
+        </div>
+        <div *ngIf="modo === 'Lídio #5'">
+          <app-lidio-sustenido></app-lidio-sustenido>
+        </div>
+        <div *ngIf="modo === 'Lídio b7'">
+          <app-lidio-bemol></app-lidio-bemol>
+        </div>
+        <div *ngIf="modo === 'Lócrio ♮2'">
+          <app-locrio-bequadro></app-locrio-bequadro>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

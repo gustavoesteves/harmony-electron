@@ -1,0 +1,44 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Outras técnicas e abordagens</h1>
+    </header>
+    <div class="row">
+      <div class="col-12 col-12-medium">
+        <h2>Acordes de emprestimo</h2>
+        <p>Acordes de empréstimo são acordes pertencentes a tonalidades que possuem estritos laços de afinidade com a
+          tonalidade em questão.</p>
+        <p>As tonalidades vizinhas a nossa Tônica, Subdominante e Dominante, são as mais próximas, portanto as que
+          usaremos para o empréstimo. Ainda existe uma outra tonalidade que compartilha a mesma Tônica que é a Homônima
+          menor.</p>
+        <p>Listaremos abaixo somente os acordes que comumente são utilizados por não interferirem no centro tonal,
+          diminuindo a possível ambiguidade.</p>
+        <h3>Tonalidade em questão: {{note}}</h3>
+        <h3>Dominante</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let column of header" scope="col">{{column}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of dominante">
+              <td *ngFor="let column of header">
+                <div *ngIf="column === 'Grau'">
+                  <div [innerHTML]="item.Acorde.Grau"></div>
+                </div>
+                <div *ngIf="column === 'Acorde'">
+                  <a class="loadChords" href="#popup" [innerHTML]="item.Acorde.Acorde"
+                    (click)="loadChords(item.Acorde)"></a>
+                </div>
+                <div *ngIf="column === 'Notas'">
+                  <div [innerHTML]="'(' + item.Acorde.Notas + ')'"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
