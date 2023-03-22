@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
     { Name: 'modulacao', Status: '' },
     { Name: 'choro', Status: '' },
     { Name: 'tabela-tonalidades', Status: '' },
-    { Name: 'harmonia-aleatoria', Status: '' }, 
-    { Name: 'harmonia-negativa', Status: '' }, 
-    { Name: 'acorde-emprestimo', Status: '' }, 
-    { Name: 'resumo', Status: '' }, 
+    { Name: 'harmonia-aleatoria', Status: '' },
+    { Name: 'harmonia-negativa', Status: '' },
+    { Name: 'acorde-emprestimo', Status: '' },
+    { Name: 'resumo', Status: '' },
   ];
 
   constructor(private tonalService: TonalService, private chorinho: Chorinho) {
@@ -54,6 +54,13 @@ export class AppComponent implements OnInit {
     this.chorinho.BuildChordProgressionInit();
     this.tonalService.pushMode('home');
   }
+
+  /*
+  async loadData() {
+    ipcRenderer.on('', (event, arg) => {
+      console.log(arg);
+    });
+  }*/
 
   ngOnInit() {
     this.tonalService.currentMode.subscribe(value => {

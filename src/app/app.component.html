@@ -89,6 +89,12 @@
   <!-- Menu do sistema-->
   <div id="sidebar">
     <div class="inner">
+      <!--Pesquisa acordes-->
+      <section id="search" class="alt">
+        <form method="post" action="#">
+          <input type="text" name="query" id="query" placeholder="Pesquisa Acorde" />
+        </form>
+      </section>
       <!-- Navbar Search-->
       <section class="alt">
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post" action="#">
@@ -116,6 +122,16 @@
       </section>
       <!-- Menu -->
       <nav id="menu">
+        <!-- Abordagem Funcional -->
+        <header class="major">
+          <h2>Preferências</h2>
+        </header>
+        <ul>
+          <li>Geral</li>
+          <li>Harmonia aplicada</li>
+        </ul>
+        <hr>
+
         <!-- Abordagem Funcional -->
         <header class="major">
           <h2>Harmonia funcional</h2>
@@ -290,6 +306,13 @@
               <li><a href="#">Sonata</a></li>
               <li><a href="#">Gavotte</a></li>
               <li><a href="#">Rondo</a></li>
+            </ul>
+          </li>
+          <li><span class={{classico}}>USA</span>
+            <ul>
+              <li><a href="#">Jazz</a></li>
+              <li><a href="#">Rock</a></li>
+              <li><a href="#">R&B</a></li>
             </ul>
           </li>
         </ul>
