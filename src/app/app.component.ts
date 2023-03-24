@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { TonalService } from './services/tonal.service';
+import { Component, OnInit } from '@angular/core';
 import { Instruments } from './services/db/instruments.db';
-import { Chorinho } from './services/frases/chorinho.frase';
+import { DataService } from './services/data.service';
+import { IPreferences } from './services/interfaces/preferences.interface';
 
 @Component({
   selector: 'app-root',
@@ -47,25 +47,20 @@ export class AppComponent implements OnInit {
     { Name: 'resumo', Status: '' },
   ];
 
-  constructor(private tonalService: TonalService, private chorinho: Chorinho) {
-    this.tonalService.pushModeInit(['sequence']);
-    this.tonalService.pushTonalityInit(['C']);
-    this.tonalService.pushInstrumentIni([Instruments[0]]);
-    this.chorinho.BuildChordProgressionInit();
-    this.tonalService.pushMode('home');
+  _preferences: IPreferences[] = [
+    {
+      tonalidade: 'C',
+      instrumento: [Instruments[0]]
+    }
+  ];
+
+  constructor(private dataService: DataService) {
+    // DataService
+    this.dataService.send('preferences', this._preferences);
   }
 
-  /*
-  async loadData() {
-    ipcRenderer.on('', (event, arg) => {
-      console.log(arg);
-    });
-  }*/
-
   ngOnInit() {
-    this.tonalService.currentMode.subscribe(value => {
-      this.menu = value[value.length - 1];
-    });
+    this.menu = 'home';
   }
 
   onClickDraw() { }
@@ -75,17 +70,17 @@ export class AppComponent implements OnInit {
       menu.Status = '';
     }
     this.menuSelecionado.find(_ => _.Name === menu).Status = 'ActiveMenu';
-    this.tonalService.pushMode(menu);
+    this.menu = menu;
   }
 
   openMenu(menu: string) {
     if (menu === 'modoMaior') {
       this.modoMaior = this.modoMaior === 'opener' ? 'opener active' : 'opener';
-      this.tonalService.pushMode('descricao-maior');
+      menu = 'descricao-maior';
     }
     if (menu === 'modoMenor') {
       this.modoMenor = this.modoMenor === 'opener' ? 'opener active' : 'opener';
-      this.tonalService.pushMode('descricao-menor');
+      menu = 'descricao-menor';
     }
     if (menu === 'menuOutrasAbordagens') {
       this.menuOutrasAbordagens = this.menuOutrasAbordagens === 'opener' ? 'opener active' : 'opener';
@@ -103,6 +98,8 @@ export class AppComponent implements OnInit {
     if (menu === 'config') {
       this.config = this.config === "opener" ? 'opener active' : 'opener';
     }
+
+    this.menu = menu;
   }
 
   changeSideBar() {
@@ -111,7 +108,8 @@ export class AppComponent implements OnInit {
   }
 
   onSelect(item: Event): void {
-    this.tonalService.pushTonality((item.target as HTMLInputElement).value);
+    this._preferences[0].tonalidade = (item.target as HTMLInputElement).value;
+    this.dataService.send('preferences', this._preferences);
   }
 
 }

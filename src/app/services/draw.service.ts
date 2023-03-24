@@ -83,8 +83,8 @@ export class DrawService {
             if (Number(position) > 5 && Number(position) > barre) { barre = Number(position); }
         }
         if (barre > 0) {
-            result.Position = barre - 4;
-            positionBarre = barre - 5;
+            result.Position = barre - 3;
+            positionBarre = barre - 4;
         } else {
             result.Position = null;
         }

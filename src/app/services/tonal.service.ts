@@ -3,9 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Chord, Scale, Note } from '@tonaljs/tonal';
 import { IInstruments } from './interfaces/instruments.interface';
 import { Instruments } from './db/instruments.db';
-import { INoteExtended } from './interfaces/notesExtended.interface';
 import { Escalas } from './db/escalas.db';
-import { INotes } from './interfaces/notes.interface';
+import { INotes, INoteExtended } from './interfaces/notes.interface';
 import { IEscala } from './interfaces/escala.interface';
 
 @Injectable({
@@ -56,11 +55,15 @@ export class TonalService {
     this.chord.next(chord);
   }
 
-  pushChord(chord: INotes) {
+  pushChord<T extends INotes>(chord: T) {
     // gravando nova tonalidade
-    const newChord = this.chord.value;
-    newChord.push(chord);
-    this.chord.next(newChord);
+    if ('NotasExtendidas' in chord) {
+      
+    } else {
+      const newChord = this.chord.value;
+      newChord.push(chord);
+      this.chord.next(newChord); 
+    }
   }
 
   pushInstrumentIni(instrument: IInstruments[]) {

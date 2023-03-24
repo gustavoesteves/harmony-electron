@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TonalService } from './../../../services/tonal.service';
 import { INotes, INotesComplete } from './../../../services/interfaces/notes.interface';
 import { Note, Chord } from '@tonaljs/tonal';
-import { INoteExtended } from './../../../services/interfaces/notesExtended.interface';
 
 @Component({
   selector: 'app-secondary-dominants',
