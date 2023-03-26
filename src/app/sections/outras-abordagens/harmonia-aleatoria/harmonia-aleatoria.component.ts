@@ -136,7 +136,7 @@ export class HarmoniaAleatoriaComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 }
 

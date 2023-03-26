@@ -1,6 +1,6 @@
 import { IInstruments } from '../interfaces/instruments.interface';
 
-export const Instruments: IInstruments[] = [
+export const InstrumentsDb: IInstruments[] = [
     { Name: 'Piano', Notes: [''], NumStrings: 0 },
     { Name: 'Baixo 4 cordas', Notes: ['E', 'A', 'D', 'G'], NumStrings: 4 },
     { Name: 'Baixo 5 cordas', Notes: ['B', 'E', 'A', 'D', 'G'], NumStrings: 5 },

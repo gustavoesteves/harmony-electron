@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Instruments } from './services/db/instruments.db';
-import { DataService } from './services/data.service';
+import { InstrumentsDb } from './services/db/instruments.db';
 import { IPreferences } from './services/interfaces/preferences.interface';
+import { TonalService } from './services/tonal.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   duasVozes = 'opener';
   linhaMelodica = 'opener';
 
-  menu = '';
   menuSelecionado: IConfigMenu[] = [
     { Name: 'maior', Status: '' },
     { Name: 'optional-chods', Status: '' },
@@ -47,20 +46,38 @@ export class AppComponent implements OnInit {
     { Name: 'resumo', Status: '' },
   ];
 
-  _preferences: IPreferences[] = [
+  _preferences: IPreferences = 
     {
+      menu: 'home',
       tonalidade: 'C',
-      instrumento: [Instruments[0]]
-    }
-  ];
+      instrumento: {
+        Name: InstrumentsDb[0].Name,
+        Notes: InstrumentsDb[0].Notes,
+        NumStrings: InstrumentsDb[0].NumStrings
+      },
+      acorde: {
+        Acorde: '',
+        Grau: ''
+      },
+      extensao: {
+        Acorde: '',
+        Cadência: '',
+        Escalas: '',
+        Extenções: '',
+        Grau: '',
+        Notas: '',
+        NotasExtendidas: ''
+      }
+    };
 
-  constructor(private dataService: DataService) {
-    // DataService
-    this.dataService.send('preferences', this._preferences);
+  constructor(private tonalService: TonalService) {
+    this.tonalService.pushPreferencesInit(this._preferences);
   }
 
   ngOnInit() {
-    this.menu = 'home';
+    this.tonalService.currentPreferences.subscribe(value => {
+      this._preferences =value[value.length - 1];
+    });
   }
 
   onClickDraw() { }
@@ -70,7 +87,9 @@ export class AppComponent implements OnInit {
       menu.Status = '';
     }
     this.menuSelecionado.find(_ => _.Name === menu).Status = 'ActiveMenu';
-    this.menu = menu;
+
+    this._preferences.menu = menu;
+    this.tonalService.pushPreferences(this._preferences);
   }
 
   openMenu(menu: string) {
@@ -99,7 +118,8 @@ export class AppComponent implements OnInit {
       this.config = this.config === "opener" ? 'opener active' : 'opener';
     }
 
-    this.menu = menu;
+    this._preferences.menu = menu;
+    this.tonalService.pushPreferences(this._preferences);
   }
 
   changeSideBar() {
@@ -109,7 +129,7 @@ export class AppComponent implements OnInit {
 
   onSelect(item: Event): void {
     this._preferences[0].tonalidade = (item.target as HTMLInputElement).value;
-    this.dataService.send('preferences', this._preferences);
+    this.tonalService.pushPreferences(this._preferences);
   }
 
 }

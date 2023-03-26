@@ -15,8 +15,8 @@ export class NaturalComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit() {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.minorMode = this.GetMinorNaturalMode(note);
     });
   }
@@ -155,6 +155,6 @@ export class NaturalComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 }

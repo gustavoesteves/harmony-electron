@@ -3,7 +3,7 @@
   <div id="main">
     <div class="inner">
       <!-- Main Page -->
-      <div *ngIf="menu === 'home'">
+      <div *ngIf="_preferences.menu === 'home'">
         <app-home></app-home>
       </div>
 
@@ -18,69 +18,69 @@
       </div>
 
       <!-- Major Mode -->
-      <div *ngIf="menu === 'descricao-maior'">
+      <div *ngIf="_preferences.menu === 'descricao-maior'">
         <app-descricao></app-descricao>
       </div>
-      <div *ngIf="menu === 'maior'">
+      <div *ngIf="_preferences.menu === 'maior'">
         <app-major-mode></app-major-mode>
       </div>
-      <div *ngIf="menu === 'optional-chods'">
+      <div *ngIf="_preferences.menu === 'optional-chods'">
         <app-optional-chords></app-optional-chords>
       </div>
-      <div *ngIf="menu === 'secondary-dominants'">
+      <div *ngIf="_preferences.menu === 'secondary-dominants'">
         <app-secondary-dominants></app-secondary-dominants>
       </div>
-      <div *ngIf="menu === 'progressao-segunda-quinta'">
+      <div *ngIf="_preferences.menu === 'progressao-segunda-quinta'">
         <app-progressao-segunda-quinta></app-progressao-segunda-quinta>
       </div>
-      <div *ngIf="menu === 'substitute-dominants'">
+      <div *ngIf="_preferences.menu === 'substitute-dominants'">
         <app-substitute-dominants></app-substitute-dominants>
       </div>
 
       <!-- Minor Mode -->
-      <div *ngIf="menu === 'descricao-menor'">
+      <div *ngIf="_preferences.menu === 'descricao-menor'">
         <app-menor-descricao></app-menor-descricao>
       </div>
-      <div *ngIf="menu === 'natural'">
+      <div *ngIf="_preferences.menu === 'natural'">
         <app-minor-mode></app-minor-mode>
       </div>
 
       <!-- Outras abordagens-->
-      <div *ngIf="menu === 'harmonia-negativa'">
+      <div *ngIf="_preferences.menu === 'harmonia-negativa'">
         <app-harmonia-negativa></app-harmonia-negativa>
       </div>
-      <div *ngIf="menu === 'harmonia-aleatoria'">
+      <div *ngIf="_preferences.menu === 'harmonia-aleatoria'">
         <app-harmonia-aleatoria></app-harmonia-aleatoria>
       </div>
-      <div *ngIf="menu === 'tabela-tonalidades'">
+      <div *ngIf="_preferences.menu === 'tabela-tonalidades'">
         <app-tabela-tonalidades></app-tabela-tonalidades>
       </div>
-      <div *ngIf="menu === 'modulacao'">
+      <div *ngIf="_preferences.menu === 'modulacao'">
         <app-modulacao></app-modulacao>
       </div>
-      <div *ngIf="menu === 'acorde-emprestimo'">
+      <div *ngIf="_preferences.menu === 'acorde-emprestimo'">
         <app-acorde-emprestimo></app-acorde-emprestimo>
       </div>
 
       <!-- Harmonia Aplicada -->
-      <div *ngIf="menu === 'resumo'">
+      <div *ngIf="_preferences.menu === 'resumo'">
         <app-resumo></app-resumo>
       </div>
-      <div *ngIf="menu === 'choro'">
+      <div *ngIf="_preferences.menu === 'choro'">
         <app-harmony-sequency></app-harmony-sequency>
       </div>
 
       <!-- Ferramentas -->
-      <div *ngIf="menu === 'frase-maior'">
+      <div *ngIf="_preferences.menu === 'frase-maior'">
         <app-frase-maior></app-frase-maior>
       </div>
-      <div *ngIf="menu === 'construtor-acordes'">
+      <div *ngIf="_preferences.menu === 'construtor-acordes'">
         <app-construtor-acordes></app-construtor-acordes>
       </div>
-      <div *ngIf="menu === 'construtor-escalas'">
+      <div *ngIf="_preferences.menu === 'construtor-escalas'">
         <app-construtor-escalas></app-construtor-escalas>
       </div>
-      <div *ngIf="menu === 'pesquisa-escalas'">
+      <div *ngIf="_preferences.menu === 'pesquisa-escalas'">
         <app-escalas-acorde></app-escalas-acorde>
       </div>
     </div>

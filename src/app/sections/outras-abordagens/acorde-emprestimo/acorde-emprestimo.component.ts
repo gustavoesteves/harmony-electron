@@ -16,9 +16,9 @@ export class AcordeEmprestimoComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit(): void {
-    this.tonalService.currentTonality.subscribe(value => {
-      this.note = value[value.length - 1];
-      this.dominante = this.loadDominante(value[value.length - 1]);
+    this.tonalService.currentPreferences.subscribe(value => {
+      this.note = value[value.length - 1].tonalidade;
+      this.dominante = this.loadDominante(value[value.length - 1].tonalidade);
     });
   }
 
@@ -66,7 +66,7 @@ export class AcordeEmprestimoComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

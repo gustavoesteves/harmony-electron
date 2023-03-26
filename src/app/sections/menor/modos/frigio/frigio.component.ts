@@ -13,8 +13,8 @@ export class FrigioComponent implements OnInit {
   phrygianMode: INotes[] = [];
 
   constructor(private tonalService: TonalService) {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.phrygianMode = this.GetMinorPhrygianMode(note);
     });
   }
@@ -118,7 +118,7 @@ export class FrigioComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

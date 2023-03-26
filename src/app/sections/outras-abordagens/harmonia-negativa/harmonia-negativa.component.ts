@@ -17,10 +17,10 @@ export class HarmoniaNegativaComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit(): void {
-    this.tonalService.currentTonality.subscribe(value => {
-      this.maior = this.loadMaior(value[value.length - 1]);
-      this.dominante = this.loadDominante(value[value.length - 1]);
-      this.tonica = this.loadTonica(value[value.length - 1]);
+    this.tonalService.currentPreferences.subscribe(value => {
+      this.maior = this.loadMaior(value[value.length - 1].tonalidade);
+      this.dominante = this.loadDominante(value[value.length - 1].tonalidade);
+      this.tonica = this.loadTonica(value[value.length - 1].tonalidade);
     });
   }
 
@@ -397,7 +397,7 @@ export class HarmoniaNegativaComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

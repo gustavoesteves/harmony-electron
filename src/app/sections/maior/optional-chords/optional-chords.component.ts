@@ -20,8 +20,8 @@ export class OptionalChordsComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit() {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.acordeSus = this.GetAcordeSus(note);
       this.primeiraOpcional = this.GetOptionalChords(note);
       this.segundaOpcional = this.GetSegundaOpcional(note);
@@ -514,6 +514,6 @@ export class OptionalChordsComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 }

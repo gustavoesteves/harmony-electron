@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chord, Note, Key } from '@tonaljs/tonal';
-import { DataService } from '../../../services/data.service';
 import { IPreferences } from '../../../services/interfaces/preferences.interface';
+import { TonalService } from '../../../services/tonal.service';
 import { INotes, INotesComplete } from './../../../services/interfaces/notes.interface';
 
 @Component({
@@ -12,19 +12,16 @@ import { INotes, INotesComplete } from './../../../services/interfaces/notes.int
 export class MajorModeComponent implements OnInit {
   header = ['Grau', 'Acorde', 'Notas', 'Extenções'];
   majorMode: INotesComplete[] = [];
-  _preferences: IPreferences[] = [];
+  _preferences: IPreferences;
 
-  constructor(private dataService: DataService) { }
+  constructor(private tonalService: TonalService) { }
 
   ngOnInit() {
-    this._preferences = this.dataService.get('preferences');
-    this.majorMode = this.GetMajorMode(this._preferences[0].tonalidade);
-    /*
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
+      this._preferences = value[value.length - 1];
       this.majorMode = this.GetMajorMode(note);
     });
-    */
   }
 
   GetMajorMode(note: string) {
@@ -73,7 +70,17 @@ export class MajorModeComponent implements OnInit {
     return majorMode;
   }
 
-  loadChords(chord: INotes) {
-    //this.tonalService.pushChord(chord);
+  loadChords(chord: INotesComplete) {
+    //INotes
+    this._preferences.acorde.Acorde = chord.Acorde;
+    this._preferences.acorde.Grau = chord.Grau;
+    //INotesComplete
+    this._preferences.extensao.Cadência = chord.Cadência;
+    this._preferences.extensao.Escalas = chord.Escalas;
+    this._preferences.extensao.Extenções = chord.Extenções;
+    this._preferences.extensao.Notas = chord.Notas;
+    this._preferences.extensao.NotasExtendidas = chord.NotasExtendidas;
+
+    this.tonalService.pushPreferences(this._preferences);
   }
 }

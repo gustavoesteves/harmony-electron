@@ -1,83 +1,45 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Chord, Scale, Note } from '@tonaljs/tonal';
-import { IInstruments } from './interfaces/instruments.interface';
-import { Instruments } from './db/instruments.db';
 import { Escalas } from './db/escalas.db';
-import { INotes, INoteExtended } from './interfaces/notes.interface';
 import { IEscala } from './interfaces/escala.interface';
+import { IPreferences } from './interfaces/preferences.interface';
+import { IInstruments } from './interfaces/instruments.interface';
+import { InstrumentsDb } from './db/instruments.db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TonalService {
 
-  // guarda o tom escolhido no combo
-  private tonality = new BehaviorSubject<string[]>([]);
-  currentTonality = this.tonality.asObservable();
-
-  // guardando o modo Maior ou Menor
-  private mode = new BehaviorSubject<string[]>([]);
-  currentMode = this.mode.asObservable();
-
-  // guarda o status da div que desenha os acordes
-  private chord = new BehaviorSubject<INotes[]>([]);
-  currentChord = this.chord.asObservable();
-
-  // guarda o instrumento
-  private instrument = new BehaviorSubject<IInstruments[]>([]);
-  currentInstrument = this.instrument.asObservable();
+  //guarda as preferencias do sistema
+  private preferences = new BehaviorSubject<IPreferences[]>([]);
+  currentPreferences = this.preferences.asObservable();
 
   constructor() { }
 
-  pushTonalityInit(tonality: string[]) {
-    this.tonality.next(tonality);
+  pushPreferencesInit(preferences: IPreferences) {
+    this.preferences.next([preferences]);
   }
 
-  pushTonality(tonality: string) {
-    // gravando nova tonalidade
-    const newTonality = this.tonality.value;
-    newTonality.push(tonality);
-    this.tonality.next(newTonality);
+  pushPreferences(preferences: IPreferences) {
+    //gravando valores das preferencias
+    let newPreferences = this.preferences.value;
+    newPreferences.push(preferences);
+    this.preferences.next(newPreferences);
   }
 
-  pushModeInit(mode: string[]) {
-    this.mode.next(mode);
-  }
-
-  pushMode(mode: string) {
-    const newMode = this.mode.value;
-    newMode.push(mode);
-    this.mode.next(newMode);
-  }
-
-  pushChordInit(chord: INoteExtended[]) {
-    this.chord.next(chord);
-  }
-
-  pushChord<T extends INotes>(chord: T) {
-    // gravando nova tonalidade
-    if ('NotasExtendidas' in chord) {
-      
-    } else {
-      const newChord = this.chord.value;
-      newChord.push(chord);
-      this.chord.next(newChord); 
-    }
-  }
-
-  pushInstrumentIni(instrument: IInstruments[]) {
-    this.instrument.next(instrument);
-  }
-
-  pushInstrument(instrument: string) {
+  pushInstrument(instrument: string, preferences: IPreferences) {
+    //buscando dados do instrumento
     let selectedInstrument: IInstruments = { Name: '', Notes: [], NumStrings: 0 };
-    selectedInstrument = Instruments.find(value => value.Name === instrument);
-    // gravando nova tonalidade
-    const newInstrument = this.instrument.value;
-    newInstrument.push(selectedInstrument);
-    this.instrument.next(newInstrument);
+    selectedInstrument = InstrumentsDb.find(value => value.Name === instrument);
+    //gravando valores das preferencias
+    let newPreferences = this.preferences.value;
+    newPreferences[0].instrumento = selectedInstrument;
+    newPreferences.push(preferences);
+    this.preferences.next(newPreferences);
   }
+
   /**
    * Outras funções
    */

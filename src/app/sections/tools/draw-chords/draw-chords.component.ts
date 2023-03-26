@@ -3,11 +3,12 @@ import { TonalService } from '../../../services/tonal.service';
 import { IInstruments } from '../../../services/interfaces/instruments.interface';
 import { findFingerings } from 'chord-fingering';
 import { ChordBox } from 'vexchords';
-import { Instruments } from './../../../services/db/instruments.db';
 import { DrawService } from './../../../services/draw.service';
 import { INotes, INotesComplete } from './../../../services/interfaces/notes.interface';
 import { Chord } from '@tonaljs/tonal';
 import { Instrument } from "piano-chart";
+import { IPreferences } from '../../../services/interfaces/preferences.interface';
+import { InstrumentsDb } from '../../../services/db/instruments.db';
 
 @Component({
   selector: 'app-draw-chords',
@@ -16,9 +17,8 @@ import { Instrument } from "piano-chart";
 })
 export class DrawChordsComponent implements OnInit {
   @ViewChild('drawChordsChart', { static: true }) divDrawChordsChart: ElementRef;
-  instrument: IInstruments;
+
   instruments: IInstruments[] = [];
-  valueAcorde: INotes;
   menuAcordes = [];
   menuBass = [];
   baixo = '';
@@ -30,6 +30,7 @@ export class DrawChordsComponent implements OnInit {
   menuAtivo = 'notas';
   btnNotas = 'button primary small';
   btnIntervalos = 'button small';
+  _preferences: IPreferences;
 
   allNotes = [
     { note: 'C', value: 0 },
@@ -52,21 +53,18 @@ export class DrawChordsComponent implements OnInit {
   ];
 
   constructor(private tonalService: TonalService, private drawService: DrawService) {
-    this.tonalService.currentInstrument.subscribe(value => {
-      this.instrument = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      this._preferences = value[value.length - 1];
+      this.InitializationChords(value[value.length - 1].acorde);
     });
-    this.tonalService.currentChord.subscribe(value => {
-      this.valueAcorde = value[value.length - 1];
-      this.InitializationChords(value[value.length - 1]);
-    });
-    this.instruments = Instruments;
+    this.instruments = InstrumentsDb;
   }
 
   ngOnInit(): void {
   }
 
   onSelectInstrument(item: Event): void {
-    this.tonalService.pushInstrument((item.target as HTMLInputElement).value);
+    this.tonalService.pushInstrument((item.target as HTMLInputElement).value, this._preferences);
     // montando acorde
     this.FindAndDrawChords();
   }
@@ -77,7 +75,7 @@ export class DrawChordsComponent implements OnInit {
     this.menuBass.length = 0;
     this.checkedNotes.length = 0;
     let count = 1;
-    let _notas = Chord.get(this.valueAcorde.Acorde);
+    let _notas = Chord.get(this._preferences.acorde.Acorde);
     for (const item of _notas.notes) {
       this.menuBass.push(item);
       if (item !== this.baixo) {
@@ -111,7 +109,7 @@ export class DrawChordsComponent implements OnInit {
   }
 
   InitializationChords(value: INotes) {
-    if (value != null) {
+    if (value.Acorde != '') {
       // montando menu
       // menu baixo
       this.menuBass.length = 0;
@@ -129,11 +127,11 @@ export class DrawChordsComponent implements OnInit {
         }
         count++;
       }
-      /*
-      for (const item of value.NotasExtendidas.split(', ')) {
+
+      for (const item of this._preferences.extensao.NotasExtendidas.split(', ')) {
         this.checkedExtencoes.push({ note: item, checked: false, value: 0 });
       }
-      */
+
       // montando acorde
       this.FindAndDrawChords();
       // montando as notas de funções harmonicas
@@ -161,8 +159,8 @@ export class DrawChordsComponent implements OnInit {
     this.divDrawChordsChart.nativeElement.innerHTML = '';
     let findsChords: string[] = [];
     let notes = this.getTriade();
-    if (this.instrument.NumStrings > 0) {
-      findsChords.push(findFingerings(this.getTriade(), [], this.baixo, this.instrument.Notes));
+    if (this._preferences.instrumento.NumStrings > 0) {
+      findsChords.push(findFingerings(this.getTriade(), [], this.baixo, this._preferences.instrumento.Notes));
 
       // verificando se quantidade de acordes esta muito baixa para retirar a quinta    
       if (findsChords[0].length < 10 && notes.length > 3) {
@@ -172,7 +170,7 @@ export class DrawChordsComponent implements OnInit {
           if (contaQuinta !== 2) { quintaFora.push(note); }
           contaQuinta++;
         }
-        findsChords.push(findFingerings(quintaFora, [], this.baixo, this.instrument.Notes));
+        findsChords.push(findFingerings(quintaFora, [], this.baixo, this._preferences.instrumento.Notes));
       }
       // imprimindo acordes na tela
       let count = 0;
@@ -181,12 +179,12 @@ export class DrawChordsComponent implements OnInit {
           if (count < 21) {
             const chordTranslate = this.drawService.GetTranslate(findsChords[i][j]);
             new ChordBox(this.divDrawChordsChart.nativeElement, {
-              numStrings: this.instrument.NumStrings,
+              numStrings: this._preferences.instrumento.NumStrings,
               numFrets: 5
             }).draw({
               chord: chordTranslate.Chord,
               position: chordTranslate.Position,
-              tuning: this.instrument.Notes
+              tuning: this._preferences.instrumento.Notes
             });
           }
           count++;

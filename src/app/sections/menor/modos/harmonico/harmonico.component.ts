@@ -13,8 +13,8 @@ export class HarmonicoComponent implements OnInit {
   harmonicMode: INotes[] = [];
 
   constructor(private tonalService: TonalService) {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.harmonicMode = this.GetMinorHarmonicMode(note);
     });
   }
@@ -115,7 +115,7 @@ export class HarmonicoComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

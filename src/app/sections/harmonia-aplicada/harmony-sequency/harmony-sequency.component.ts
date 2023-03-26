@@ -39,8 +39,8 @@ export class HarmonySequencyComponent implements OnInit {
     this.chorinho.currentFrase.subscribe(value => {
       this.frase = value[value.length - 1];
     });
-    this.tonalService.currentTonality.subscribe(value => {
-      this.note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      this.note = value[value.length - 1].tonalidade;
       this.chorinho.GetCompasso(this.esquema, this.frase, this.note);
     });
   }
@@ -50,7 +50,7 @@ export class HarmonySequencyComponent implements OnInit {
   }
 
   onClickXML() {
-    this.tonalService.pushModeInit(['xmlmusic']);
+    //this.tonalService.pushModeInit(['xmlmusic']);
   }
 
   loadChords(chord: string) { }

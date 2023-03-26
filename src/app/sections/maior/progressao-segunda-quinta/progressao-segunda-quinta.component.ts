@@ -13,8 +13,8 @@ export class ProgressaoSegundaQuintaComponent implements OnInit {
   twoFiveSecondaryDominant: INotes[] = [];
 
   constructor(private tonalService: TonalService) {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.twoFiveSecondaryDominant = this.GetTwoFiveSecondaryDominant(note);
     });
   }
@@ -167,7 +167,7 @@ export class ProgressaoSegundaQuintaComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

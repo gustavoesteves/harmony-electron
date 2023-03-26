@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IInstruments } from './../../../services/interfaces/instruments.interface';
-import { Instruments } from './../../../services/db/instruments.db';
+import { InstrumentsDb } from './../../../services/db/instruments.db';
 import { DrawService } from './../../../services/draw.service';
 import { ChordBox } from 'vexchords';
 
@@ -11,8 +11,8 @@ import { ChordBox } from 'vexchords';
 })
 export class ConstrutorEscalasComponent implements OnInit {
   @ViewChild('drawChordsChart', { static: true }) divDrawChordsChart: ElementRef;
-  instruments: IInstruments[] = Instruments;
-  instrument: IInstruments = Instruments[0];
+  instruments: IInstruments[] = InstrumentsDb;
+  instrument: IInstruments = InstrumentsDb[0];
   // notas checadas
   checkedNotes = [
     { id: 0, note: 'C', checked: false, value: 0 },
@@ -59,7 +59,7 @@ export class ConstrutorEscalasComponent implements OnInit {
   }
 
   onSelectInstrument(item: string): void {
-    this.instrument = Instruments.find(value => value.Name === item);
+    this.instrument = InstrumentsDb.find(value => value.Name === item);
     this.gerarAcorde();
   }
 

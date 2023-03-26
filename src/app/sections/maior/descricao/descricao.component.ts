@@ -33,8 +33,8 @@ export class DescricaoComponent implements OnInit {
   ];
 
   constructor(private tonalService: TonalService) {
-    this.tonalService.currentTonality.subscribe(value => {
-      this.note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      this.note = value[value.length - 1].tonalidade;
       this.notasDescritivas[0].note = this.note;
       this.notasDescritivas[1].note = Note.transpose(this.note, '2M');
       this.notasDescritivas[2].note = Note.transpose(this.note, '3M');

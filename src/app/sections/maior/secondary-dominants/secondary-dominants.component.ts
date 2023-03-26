@@ -16,8 +16,8 @@ export class SecondaryDominantsComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit() {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.secondaryDominants = this.GetSecondaryDominants(note);
       this.extendedDominants = this.GetExtendedDominants(note);
     });
@@ -166,6 +166,6 @@ export class SecondaryDominantsComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 }

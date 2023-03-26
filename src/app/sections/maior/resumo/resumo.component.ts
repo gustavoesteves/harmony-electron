@@ -24,8 +24,8 @@ export class ResumoComponent implements OnInit {
   constructor(private tonalService: TonalService) { }
 
   ngOnInit(): void {
-    this.tonalService.currentTonality.subscribe(value => {
-      const note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      const note = value[value.length - 1].tonalidade;
       this.majorList = this.GetMajorMode(note);
       this.majorListDominanteSecundaria = this.GetDominanteSecundaria(note);
       this.majorListProgressao = this.GetProgressao(note);
@@ -286,7 +286,7 @@ export class ResumoComponent implements OnInit {
   }
 
   loadChords(chord: INotes) {
-    this.tonalService.pushChord(chord);
+    //this.tonalService.pushChord(chord);
   }
 
 }

@@ -10,8 +10,3 @@ export interface INotesComplete extends INotes {
     NotasExtendidas: string;
     Cadência: string;
 }
-
-export interface INoteExtended extends INotes {
-    Roman: string;
-    Acordes: string[];
-}

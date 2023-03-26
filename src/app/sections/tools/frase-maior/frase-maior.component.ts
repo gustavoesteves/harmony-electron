@@ -46,8 +46,8 @@ export class FraseMaiorComponent implements OnInit {
   finalNote = 0;
 
   constructor(private tonalService: TonalService) {
-    this.tonalService.currentTonality.subscribe(value => {
-      this.note = value[value.length - 1];
+    this.tonalService.currentPreferences.subscribe(value => {
+      this.note = value[value.length - 1].tonalidade;
     });
   }
 
