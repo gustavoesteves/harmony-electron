@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InstrumentsDb } from './services/db/instruments.db';
 import { IPreferences } from './services/interfaces/preferences.interface';
 import { TonalService } from './services/tonal.service';
+import { Chord, ChordType } from '@tonaljs/tonal';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ import { TonalService } from './services/tonal.service';
 })
 export class AppComponent implements OnInit {
   sidebar = '';
+  searchQuery = ''
+  filteredResults: string[] = [];
+  searchTerm: string = '';
+  showResults: boolean = false;
   harmonia = 'opener';
   config = 'opener';
 
@@ -44,6 +49,7 @@ export class AppComponent implements OnInit {
     { Name: 'harmonia-negativa', Status: '' },
     { Name: 'acorde-emprestimo', Status: '' },
     { Name: 'resumo', Status: '' },
+    { Name: 'primeiraEspecie', Status: '' },
   ];
 
   _preferences: IPreferences = 
@@ -129,6 +135,29 @@ export class AppComponent implements OnInit {
 
   onSelect(item: Event): void {
     this._preferences[0].tonalidade = (item.target as HTMLInputElement).value;
+    this.tonalService.pushPreferences(this._preferences);
+  }
+
+  onSearch(item: Event): void {
+    this.filteredResults = [];
+    ChordType.all()
+      .filter(_ => _.intervals.length <= 6 && _.name != '')
+      .map(_ => _.aliases[0]).forEach(_ => {
+        this.filteredResults.push((item.target as HTMLInputElement).value + ' ' + _);
+      });
+    this.searchTerm = (item.target as HTMLInputElement).value;
+    this.showResults = true;
+  }
+
+  selectResult(result: string): void {
+    let chord = Chord.get(result);
+    this._preferences.acorde.Acorde = chord.name;
+    this._preferences.extensao.Notas = chord.notes.toString();
+    this._preferences.extensao.NotasExtendidas = '';
+
+    this.searchTerm = result;
+    this.showResults = false;
+
     this.tonalService.pushPreferences(this._preferences);
   }
 

@@ -53,6 +53,10 @@ import { BaiaoComponent } from './sections/harmonia-aplicada/baiao/baiao.compone
 import { FrevoComponent } from './sections/harmonia-aplicada/frevo/frevo.component';
 import { ValsaMineiraComponent } from './sections/harmonia-aplicada/valsa-mineira/valsa-mineira.component';
 import { AcordeEmprestimoComponent } from './sections/outras-abordagens/acorde-emprestimo/acorde-emprestimo.component';
+import { PrimeiraEspecieComponent } from './sections/contraponto/primeira-especie/primeira-especie.component';
+import { SegundaEspecieComponent } from './sections/contraponto/segunda-especie/segunda-especie.component';
+import { TerceiraEspecieComponent } from './sections/contraponto/terceira-especie/terceira-especie.component';
+import { QuartaEspecieComponent } from './sections/contraponto/quarta-especie/quarta-especie.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +97,11 @@ import { AcordeEmprestimoComponent } from './sections/outras-abordagens/acorde-e
     NeotonalismoComponent,
     HarmoniaAleatoriaComponent,
     AcordeEmprestimoComponent,
-    ResumoComponent
+    ResumoComponent,
+    PrimeiraEspecieComponent,
+    SegundaEspecieComponent,
+    TerceiraEspecieComponent,
+    QuartaEspecieComponent
   ],
   imports: [
     BrowserModule,

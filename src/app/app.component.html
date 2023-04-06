@@ -2,6 +2,55 @@
   <!-- Paginas -->
   <div id="main">
     <div class="inner">
+
+      <!-- Header -->
+      <header id="header">
+        <!--Pesquisa acordes-->
+        <section id="search" class="alt">
+          <form method="post" action="#">
+            <input type="text" (input)="onSearch($event)" [value]="searchTerm" placeholder="Pesquisa acorde">
+            <div class="search-container">
+              <ul class="search-results" *ngIf="showResults">
+                <li *ngFor="let result of filteredResults">
+                  <a class="loadChords" href="#popup" [innerHTML]="result" (click)="selectResult(result)"></a>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </section>
+
+        <ul class="icons">
+          <li>
+            <!-- Navbar Search-->
+            <section class="alt">
+              <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post"
+                action="#">
+                <select name="demo-category" id="demo-category" (change)="onSelect($event)">
+                  <option value="">Tonalidade</option>
+                  <option value="C">C</option>
+                  <option value="G">G</option>
+                  <option value="D">D</option>
+                  <option value="A">A</option>
+                  <option value="E">E</option>
+                  <option value="B">B</option>
+                  <option value="F#">F&#9839;</option>
+                  <option value="Gb">G&#9837;</option>
+                  <option value="C#">C&#9839;</option>
+                  <option value="Db">D&#9837;</option>
+                  <option value="G#">G&#9839;</option>
+                  <option value="Ab">A&#9837;</option>
+                  <option value="D#">D&#9839;</option>
+                  <option value="Eb">E&#9837;</option>
+                  <option value="A#">A&#9839;</option>
+                  <option value="Bb">B&#9837;</option>
+                  <option value="F">F</option>
+                </select>
+              </form>
+            </section>
+          </li>
+        </ul>
+      </header>
+
       <!-- Main Page -->
       <div *ngIf="_preferences.menu === 'home'">
         <app-home></app-home>
@@ -62,6 +111,11 @@
         <app-acorde-emprestimo></app-acorde-emprestimo>
       </div>
 
+      <!-- Contraponto -->
+      <div *ngIf="_preferences.menu === 'primeiraEspecie'">
+        <app-primeira-especie></app-primeira-especie>
+      </div>
+
       <!-- Harmonia Aplicada -->
       <div *ngIf="_preferences.menu === 'resumo'">
         <app-resumo></app-resumo>
@@ -89,37 +143,7 @@
   <!-- Menu do sistema-->
   <div id="sidebar">
     <div class="inner">
-      <!--Pesquisa acordes-->
-      <section id="search" class="alt">
-        <form method="post" action="#">
-          <input type="text" name="query" id="query" placeholder="Pesquisa Acorde" />
-        </form>
-      </section>
-      <!-- Navbar Search-->
-      <section class="alt">
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post" action="#">
-          <select name="demo-category" id="demo-category" (change)="onSelect($event)">
-            <option value="">Tonalidade</option>
-            <option value="C">C</option>
-            <option value="G">G</option>
-            <option value="D">D</option>
-            <option value="A">A</option>
-            <option value="E">E</option>
-            <option value="B">B</option>
-            <option value="F#">F&#9839;</option>
-            <option value="Gb">G&#9837;</option>
-            <option value="C#">C&#9839;</option>
-            <option value="Db">D&#9837;</option>
-            <option value="G#">G&#9839;</option>
-            <option value="Ab">A&#9837;</option>
-            <option value="D#">D&#9839;</option>
-            <option value="Eb">E&#9837;</option>
-            <option value="A#">A&#9839;</option>
-            <option value="Bb">B&#9837;</option>
-            <option value="F">F</option>
-          </select>
-        </form>
-      </section>
+
       <!-- Menu -->
       <nav id="menu">
         <!-- Abordagem Funcional -->
@@ -226,7 +250,8 @@
           <li>
             <span class={{duasVozes}} (click)="openMenu('duasVozes')">Contraponto a duas vozes</span>
             <ul>
-              <li><a href="#">Primeira espécie</a></li>
+              <li><a class={{menuSelecionado[22].Status}} (click)="changeMenu('primeiraEspecie')">Primeira espécie</a>
+              </li>
               <li><a href="#">Segunda espécie</a></li>
               <li><a href="#">Terceira espécie</a></li>
               <li><a href="#">Quarta espécie</a></li>

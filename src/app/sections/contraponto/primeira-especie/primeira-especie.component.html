@@ -1,0 +1,50 @@
+<section>
+  <div class="content">
+    <header>
+      <h1>Contraponto a duas vozes</h1>
+    </header>
+    <div class="row">
+      <div class="col-12 col-12-medium">
+        <p>O contraponto de primeira espécie, também conhecido como "nota contra nota", é uma técnica de composição
+          musical que consiste em criar uma melodia secundária que seja harmonicamente compatível com uma melodia
+          principal. O objetivo é criar uma harmonia interessante que mantenha a independência e coerência de cada voz.
+        </p>
+        <p>Para compor um contraponto de primeira espécie, é preciso seguir algumas regras básicas, tais como:</p>
+        <ul>
+          <li>Cada nota da melodia secundária deve ser harmonicamente consonante com a nota correspondente da melodia
+            principal.</li>
+          <li>As notas da melodia secundária devem formar um padrão rítmico coerente com a melodia principal.</li>
+          <li>As notas da melodia secundária devem ser mantidas em uma faixa razoável de intervalos em relação à melodia
+            principal. Intervalos harmônicos, como terças e sextas, são preferíveis a intervalos dissonantes, como
+            segundas e sétimas.</li>
+          <li>É preciso evitar o uníssono e a oitava simultâneos, a não ser em momentos específicos, como no início e no
+            final da peça.</li>
+          <li>É preciso evitar o uníssono e a oitava simultâneos, a não ser em momentos específicos, como no início e no
+            final da peça.</li>
+          <li>É preciso evitar o cruzamento das vozes, ou seja, a passagem da voz secundária acima da voz principal ou
+            vice-versa.</li>
+          <li>A melodia secundária deve terminar em uma nota que forme um acorde consonante com a nota final da melodia
+            principal.
+          </li>
+        </ul>
+        <table class="table">
+          <thead>
+            <tr *ngFor="let item of _header">
+              <th scope="col">{{item.Compasso}}</th>
+              <th scope="col">{{item.Acorde}}</th>
+              <th scope="col">{{item.Cantusfirmus}}</th>
+              <th scope="col">{{item.Contraponto}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of _body">
+              <td>{{item.Compasso}}</td>
+              <td>{{item.Acorde}}</td>
+              <td>{{item.Cantusfirmus}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
